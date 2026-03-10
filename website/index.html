@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Early Disease Prediction System | ML Capstone Project</title>
+  <meta name="description" content="An ML-powered system that predicts 6 diseases from 24 blood biomarkers using an ensemble of 7 trained models including XGBoost, LightGBM, and Random Forest." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩺</text></svg>" />
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════
+       NAVIGATION
+       ════════════════════════════════════════ -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">
+      <div class="logo-icon">🩺</div>
+      DiagnosAI
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#pipeline">Pipeline</a></li>
+      <li><a href="#dataset">Dataset</a></li>
+      <li><a href="#models">Models</a></li>
+      <li><a href="#metrics">Results</a></li>
+      <li><a href="#demo" class="nav-cta">Try App →</a></li>
+    </ul>
+
+    <div class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="dot"></div>
+        Capstone ML Project &nbsp;·&nbsp; Blood Biomarker Classification
+      </div>
+
+      <h1 class="hero-title">
+        Early Disease<br />
+        <span class="gradient-text">Prediction System</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        An ensemble machine learning pipeline that classifies 6 health conditions
+        from 24 normalized blood biomarkers — with SMOTE balancing, cross-validation,
+        and explainability via SHAP.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#demo" class="btn-primary">
+          🚀 Launch Web App
+        </a>
+        <a href="#pipeline" class="btn-secondary">
+          📖 How It Works
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">7<span>+</span></div>
+          <div class="stat-label">ML Models Trained</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">24</div>
+          <div class="stat-label">Blood Biomarkers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">6</div>
+          <div class="stat-label">Disease Classes</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">486</div>
+          <div class="stat-label">Patient Records</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       ABOUT
+       ════════════════════════════════════════ -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-card-main">
+          <div class="disease-icons">
+            <div class="disease-icon-item">
+              <div class="di-emoji">🍬</div>
+              <div class="di-name">Diabetes</div>
+            </div>
+            <div class="disease-icon-item">
+              <div class="di-emoji">❤️</div>
+              <div class="di-name">Heart Disease</div>
+            </div>
+            <div class="disease-icon-item">
+              <div class="di-emoji">🩸</div>
+              <div class="di-name">Anemia</div>
+            </div>
+            <div class="disease-icon-item">
+              <div class="di-emoji">🧬</div>
+              <div class="di-name">Thalassemia</div>
+            </div>
+            <div class="disease-icon-item">
+              <div class="di-emoji">💊</div>
+              <div class="di-name">Thrombocytopenia</div>
+            </div>
+            <div class="disease-icon-item">
+              <div class="di-emoji">✅</div>
+              <div class="di-name">Healthy</div>
+            </div>
+          </div>
+          <div style="text-align:center; padding: 1rem 0; border-top: 1px solid rgba(255,255,255,0.08);">
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">Model Confidence</div>
+            <div style="font-size: 2.5rem; font-family: 'Outfit', sans-serif; font-weight: 800; background: linear-gradient(135deg, #60A5FA, #34D399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">95%+</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">on majority classes</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-text reveal">
+        <div class="section-tag">About the Project</div>
+        <h2>AI-Powered Blood<br />Analysis at Scale</h2>
+        <p>
+          This capstone project builds a complete end-to-end machine learning system
+          that takes a patient's 24 normalized blood test values and predicts which of
+          6 health conditions they likely have — all in milliseconds.
+        </p>
+        <p>
+          The dataset contains 486 real-world patient records with severe class imbalance
+          (only 5 "Healthy" samples vs 294 Diabetes samples). The system handles this with
+          SMOTE oversampling, stratified splits, and a soft-voting ensemble of the top 3 models.
+        </p>
+        <ul class="feature-list">
+          <li>
+            <div class="check">✓</div>
+            <span>Full ML pipeline from raw CSV to deployed prediction</span>
+          </li>
+          <li>
+            <div class="check">✓</div>
+            <span>SMOTE handles extreme class imbalance (k=3 for tiny "Healthy" class)</span>
+          </li>
+          <li>
+            <div class="check">✓</div>
+            <span>Ensemble of best 3 models using soft-vote probability averaging</span>
+          </li>
+          <li>
+            <div class="check">✓</div>
+            <span>SHAP explainability shows which biomarkers drive predictions</span>
+          </li>
+          <li>
+            <div class="check">✓</div>
+            <span>Interactive Streamlit web app with export functionality</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       PIPELINE
+       ════════════════════════════════════════ -->
+  <section id="pipeline">
+    <div class="section-header reveal">
+      <div class="section-tag">ML Pipeline</div>
+      <h2 class="section-title">How the System Works</h2>
+      <p class="section-desc">
+        From raw CSV to final ensemble prediction — a carefully designed 7-step pipeline
+        that avoids data leakage and handles class imbalance.
+      </p>
+    </div>
+
+    <div class="pipeline-flow">
+      <div class="pipeline-step step-1 reveal">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Data Loading &amp; Cleaning</h3>
+          <p>Load <code>blood_samples_dataset_test.csv</code> with 486 records × 25 columns. Remap truncated disease names (<code>Thalasse → Thalassemia</code>, <code>Heart Di → Heart Disease</code>) using a disease_map dictionary.</p>
+        </div>
+      </div>
+
+      <div class="pipeline-step step-2 reveal">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>Encoding &amp; Train/Test Split</h3>
+          <p>Apply <strong>LabelEncoder</strong> to the target column. Perform an <strong>80/20 stratified split</strong> to preserve class proportions in both splits — crucial for the tiny minority classes.</p>
+        </div>
+      </div>
+
+      <div class="pipeline-step step-3 reveal">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Feature Scaling</h3>
+          <p><strong>StandardScaler</strong> fitted exclusively on training data and applied to both train and test sets — preventing any data leakage from the test distribution.</p>
+        </div>
+      </div>
+
+      <div class="pipeline-step step-4 reveal">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>SMOTE Oversampling</h3>
+          <p>Apply <strong>SMOTE</strong> (k_neighbors=3) only on the training set to synthesize minority class samples. k=3 instead of default k=5 because "Healthy" has only 5 original samples.</p>
+        </div>
+      </div>
+
+      <div class="pipeline-step step-5 reveal">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <h3>Train 7 Models + Cross-Validation</h3>
+          <p>Train all 7 classifiers (Logistic Regression, KNN, Random Forest, Gradient Boosting, XGBoost, LightGBM, SVM) with <strong>StratifiedKFold (k=5)</strong> cross-validation to get reliable accuracy estimates.</p>
+        </div>
+      </div>
+
+      <div class="pipeline-step step-6 reveal">
+        <div class="step-number">6</div>
+        <div class="step-content">
+          <h3>Ensemble The Top 3</h3>
+          <p>Select top 3 models by test accuracy and combine them in a <strong>soft-voting VotingClassifier</strong> — averaging predicted probabilities for smoother, better-calibrated outputs.</p>
+        </div>
+      </div>
+
+      <div class="pipeline-step step-7 reveal">
+        <div class="step-number">7</div>
+        <div class="step-content">
+          <h3>Save &amp; Deploy</h3>
+          <p>Persist the winner (ensemble or best individual) as <code>model.pkl</code> alongside <code>scaler.pkl</code>, <code>label_encoder.pkl</code>, and <code>feature_names.json</code>. Load into Streamlit for real-time prediction.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       DATASET & FEATURES
+       ════════════════════════════════════════ -->
+  <section id="dataset">
+    <div class="section-header reveal">
+      <div class="section-tag">Dataset</div>
+      <h2 class="section-title">Blood Biomarker Data</h2>
+      <p class="section-desc">
+        486 patient records with 24 fully normalized (0.0–1.0) features and no missing values.
+      </p>
+    </div>
+
+    <div class="dataset-grid">
+      <div class="info-card reveal">
+        <div class="info-card-icon">📊</div>
+        <h3>Dataset Shape</h3>
+        <p><strong>486 rows × 25 columns</strong> — 24 blood biomarker features plus 1 target disease column. All features are pre-normalized to the 0.0–1.0 range.</p>
+      </div>
+      <div class="info-card reveal">
+        <div class="info-card-icon">⚖️</div>
+        <h3>Class Imbalance</h3>
+        <p>Heavily imbalanced — Diabetes has <strong>294 samples</strong> while Healthy has only <strong>5 samples</strong>. Addressed with SMOTE and stratified splitting.</p>
+      </div>
+      <div class="info-card reveal">
+        <div class="info-card-icon">🧪</div>
+        <h3>No Missing Values</h3>
+        <p>Clean dataset with <strong>zero missing entries</strong>. No imputation required. Disease labels are cleaned by expanding truncated 8-character names to full names.</p>
+      </div>
+    </div>
+
+    <h3 style="text-align:center; margin-bottom: 1.5rem; font-family:'Outfit',sans-serif; font-size:1.3rem; color:var(--text-muted);">24 Input Biomarkers — Organized by Category</h3>
+
+    <div class="features-grid">
+      <div class="feature-group reveal">
+        <div class="fg-header" style="color: #F87171;">🔴 Blood Cell Markers</div>
+        <ul class="fg-items">
+          <li>Hemoglobin</li>
+          <li>Platelets</li>
+          <li>White Blood Cells</li>
+          <li>Red Blood Cells</li>
+          <li>Hematocrit</li>
+          <li>Mean Corpuscular Volume</li>
+          <li>Mean Corpuscular Hemoglobin</li>
+          <li>MCH Concentration</li>
+        </ul>
+      </div>
+
+      <div class="feature-group reveal">
+        <div class="fg-header" style="color: #FBBF24;">🍬 Metabolic Markers</div>
+        <ul class="fg-items">
+          <li>Glucose</li>
+          <li>Insulin</li>
+          <li>BMI</li>
+          <li>HbA1c</li>
+          <li>Triglycerides</li>
+        </ul>
+      </div>
+
+      <div class="feature-group reveal">
+        <div class="fg-header" style="color: #F87171;">❤️ Cardiovascular Markers</div>
+        <ul class="fg-items">
+          <li>Cholesterol</li>
+          <li>LDL Cholesterol</li>
+          <li>HDL Cholesterol</li>
+          <li>Systolic Blood Pressure</li>
+          <li>Diastolic Blood Pressure</li>
+          <li>Heart Rate</li>
+          <li>Troponin</li>
+        </ul>
+      </div>
+
+      <div class="feature-group reveal">
+        <div class="fg-header" style="color: #A78BFA;">🧪 Liver &amp; Inflammation</div>
+        <ul class="fg-items">
+          <li>ALT</li>
+          <li>AST</li>
+          <li>Creatinine</li>
+          <li>C-reactive Protein</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       MODELS
+       ════════════════════════════════════════ -->
+  <section id="models">
+    <div class="section-header reveal">
+      <div class="section-tag">ML Models</div>
+      <h2 class="section-title">7 Models. Best 3 Ensembled.</h2>
+      <p class="section-desc">
+        Every model is trained, cross-validated, and ranked. The top 3 by test accuracy
+        are combined into a soft-voting ensemble for the final prediction.
+      </p>
+    </div>
+
+    <div class="models-grid">
+      <div class="model-card reveal">
+        <div class="model-icon">📉</div>
+        <div class="model-name">Logistic Regression</div>
+        <div class="model-desc">Linear baseline classifier with max_iter=1000. Fast and interpretable; establishes the minimum benchmark.</div>
+        <span class="model-tag">Baseline</span>
+      </div>
+
+      <div class="model-card reveal">
+        <div class="model-icon">🔵</div>
+        <div class="model-name">K-Nearest Neighbors</div>
+        <div class="model-desc">Instance-based learner with k=7 neighbors. Works well on the normalized feature space.</div>
+        <span class="model-tag">Distance-Based</span>
+      </div>
+
+      <div class="model-card reveal">
+        <div class="model-icon">🌲</div>
+        <div class="model-name">Random Forest</div>
+        <div class="model-desc">200-tree bagging ensemble. Robust to outliers and provides native feature importance scores.</div>
+        <span class="model-tag">Tree Ensemble</span>
+      </div>
+
+      <div class="model-card reveal">
+        <div class="model-icon">📈</div>
+        <div class="model-name">Gradient Boosting</div>
+        <div class="model-desc">Sequential boosting with 200 estimators. Handles complex non-linear relationships in biomarker data.</div>
+        <span class="model-tag">Boosting</span>
+      </div>
+
+      <div class="model-card reveal">
+        <div class="model-icon">⚡</div>
+        <div class="model-name">XGBoost</div>
+        <div class="model-desc">Optimized gradient boosting with regularization. Industry-standard for structured tabular data.</div>
+        <span class="model-tag">Boosting</span>
+      </div>
+
+      <div class="model-card reveal">
+        <div class="model-icon">💡</div>
+        <div class="model-name">LightGBM</div>
+        <div class="model-desc">Leaf-wise fast gradient boosting. Extremely efficient with 200 estimators and minimal memory.</div>
+        <span class="model-tag">Boosting</span>
+      </div>
+
+      <div class="model-card reveal">
+        <div class="model-icon">🎯</div>
+        <div class="model-name">SVM (RBF)</div>
+        <div class="model-desc">Support Vector Machine with RBF kernel and probability calibration — powerful in high-dimensional spaces.</div>
+        <span class="model-tag">Kernel Method</span>
+      </div>
+
+      <div class="model-card reveal" style="border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.07);">
+        <div class="model-icon">🏆</div>
+        <div class="model-name">Soft Voting Ensemble</div>
+        <div class="model-desc">Top 3 models combined using averaged probability predictions. Reduces variance and improves calibration over any single model.</div>
+        <span class="model-tag ensemble">Final Model</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       METRICS / RESULTS
+       ════════════════════════════════════════ -->
+  <section id="metrics">
+    <div class="section-header reveal">
+      <div class="section-tag">Results</div>
+      <h2 class="section-title">Model Performance</h2>
+      <p class="section-desc">
+        Evaluated with accuracy, 5-fold cross-validation, classification reports,
+        confusion matrices, feature importance, and SHAP values.
+      </p>
+    </div>
+
+    <div class="metrics-container">
+      <div class="metrics-row">
+        <div class="metric-card reveal">
+          <div class="metric-value" id="acc-counter">—</div>
+          <div class="metric-label">Accuracy (Majority Classes)</div>
+        </div>
+        <div class="metric-card reveal">
+          <div class="metric-value">5<span style="font-size:1.5rem">-Fold</span></div>
+          <div class="metric-label">StratifiedKFold CV</div>
+        </div>
+        <div class="metric-card reveal">
+          <div class="metric-value">7</div>
+          <div class="metric-label">Models Compared</div>
+        </div>
+        <div class="metric-card reveal">
+          <div class="metric-value">3<span style="font-size:1.5rem">-in-1</span></div>
+          <div class="metric-label">Soft Voting Ensemble</div>
+        </div>
+      </div>
+
+      <div class="disease-dist reveal">
+        <h3>📊 Dataset Class Distribution</h3>
+        <div class="dist-bar-group" id="distBars">
+          <div class="dist-bar-item">
+            <div class="dist-label">🍬 Diabetes</div>
+            <div class="dist-bar-track">
+              <div class="dist-bar-fill" style="background: linear-gradient(90deg,#F59E0B,#D97706); width:0%" data-width="100%"></div>
+            </div>
+            <div class="dist-count">294</div>
+          </div>
+          <div class="dist-bar-item">
+            <div class="dist-label">🩸 Anemia</div>
+            <div class="dist-bar-track">
+              <div class="dist-bar-fill" style="background: linear-gradient(90deg,#9C4CC5,#7C3AED); width:0%" data-width="28.6%"></div>
+            </div>
+            <div class="dist-count">84</div>
+          </div>
+          <div class="dist-bar-item">
+            <div class="dist-label">🧬 Thalassemia</div>
+            <div class="dist-bar-track">
+              <div class="dist-bar-fill" style="background: linear-gradient(90deg,#3B82F6,#2563EB); width:0%" data-width="16.3%"></div>
+            </div>
+            <div class="dist-count">48</div>
+          </div>
+          <div class="dist-bar-item">
+            <div class="dist-label">❤️ Heart Disease</div>
+            <div class="dist-bar-track">
+              <div class="dist-bar-fill" style="background: linear-gradient(90deg,#EF4444,#DC2626); width:0%" data-width="13.3%"></div>
+            </div>
+            <div class="dist-count">39</div>
+          </div>
+          <div class="dist-bar-item">
+            <div class="dist-label">💊 Thrombocytopenia</div>
+            <div class="dist-bar-track">
+              <div class="dist-bar-fill" style="background: linear-gradient(90deg,#06B6D4,#0891B2); width:0%" data-width="5.4%"></div>
+            </div>
+            <div class="dist-count">16</div>
+          </div>
+          <div class="dist-bar-item">
+            <div class="dist-label">✅ Healthy</div>
+            <div class="dist-bar-track">
+              <div class="dist-bar-fill" style="background: linear-gradient(90deg,#10B981,#059669); width:0%" data-width="1.7%"></div>
+            </div>
+            <div class="dist-count">5</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       DEMO
+       ════════════════════════════════════════ -->
+  <section id="demo">
+    <div class="demo-inner">
+      <div class="demo-text reveal">
+        <div class="section-tag">Web App</div>
+        <h2>Interactive<br />Streamlit App</h2>
+        <p>
+          Enter 24 blood biomarker values through organized slider tabs — Blood Cell,
+          Metabolic, Cardiovascular, and Liver markers — then click Predict to get
+          an instant disease classification with confidence scores, probability bars,
+          health recommendations, and a downloadable report.
+        </p>
+        <div class="hero-buttons" style="justify-content:flex-start;">
+          <a href="https://share.streamlit.io" target="_blank" class="btn-primary">
+            🚀 Open Streamlit App
+          </a>
+          <a href="https://github.com" target="_blank" class="btn-secondary">
+            📁 View on GitHub
+          </a>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem;">
+          ⚠️ Deploy using <code>streamlit run capstonepr.py</code>&nbsp;&nbsp;|&nbsp;&nbsp;Requires trained model artifacts in <code>disease_prediction_model/</code>
+        </p>
+      </div>
+
+      <div class="demo-screenshot reveal">
+        <div class="demo-mockup">
+          <div class="mockup-header">
+            <div class="mockup-dot d-red"></div>
+            <div class="mockup-dot d-yellow"></div>
+            <div class="mockup-dot d-green"></div>
+            <div class="mockup-title">🩺 Disease Prediction System</div>
+          </div>
+          <div class="mockup-content">
+            <div class="mock-label">
+              <span>🍬 Diabetes</span><span>78.4%</span>
+            </div>
+            <div class="dist-bar-track">
+              <div class="dist-bar-fill" style="background:linear-gradient(90deg,#F59E0B,#D97706); width:78.4%;"></div>
+            </div>
+
+            <div class="mock-label" style="margin-top:0.5rem;">
+              <span>🩸 Anemia</span><span>12.1%</span>
+            </div>
+            <div class="dist-bar-track">
+              <div class="dist-bar-fill" style="background:linear-gradient(90deg,#9C4CC5,#7C3AED); width:12.1%;"></div>
+            </div>
+
+            <div class="mock-label" style="margin-top:0.5rem;">
+              <span>❤️ Heart Disease</span><span>6.3%</span>
+            </div>
+            <div class="dist-bar-track">
+              <div class="dist-bar-fill" style="background:linear-gradient(90deg,#EF4444,#DC2626); width:6.3%;"></div>
+            </div>
+
+            <div class="mock-label" style="margin-top:0.5rem;">
+              <span>🧬 Thalassemia</span><span>2.8%</span>
+            </div>
+            <div class="dist-bar-track">
+              <div class="dist-bar-fill" style="background:linear-gradient(90deg,#3B82F6,#2563EB); width:2.8%;"></div>
+            </div>
+
+            <div style="height:1rem;"></div>
+
+            <div class="mock-result">
+              🍬 Predicted: Diabetes &nbsp;·&nbsp; Confidence: 78.4%
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       TECH STACK
+       ════════════════════════════════════════ -->
+  <section id="techstack">
+    <div class="section-header reveal">
+      <div class="section-tag">Tech Stack</div>
+      <h2 class="section-title">Built With</h2>
+      <p class="section-desc">A Python-first ML stack for end-to-end training, evaluation, and deployment.</p>
+    </div>
+
+    <div class="tech-grid">
+      <div class="tech-badge"><div class="t-dot" style="background:#4B8BBE;"></div> Python 3.x</div>
+      <div class="tech-badge"><div class="t-dot" style="background:#F7C59F;"></div> Pandas</div>
+      <div class="tech-badge"><div class="t-dot" style="background:#4DABCF;"></div> NumPy</div>
+      <div class="tech-badge"><div class="t-dot" style="background:#EE4C2C;"></div> Scikit-learn</div>
+      <div class="tech-badge"><div class="t-dot" style="background:#189AB4;"></div> imbalanced-learn</div>
+      <div class="tech-badge"><div class="t-dot" style="background:#006600;"></div> XGBoost</div>
+      <div class="tech-badge"><div class="t-dot" style="background:#00B4D8;"></div> LightGBM</div>
+      <div class="tech-badge"><div class="t-dot" style="background:#E84A5F;"></div> SHAP</div>
+      <div class="tech-badge"><div class="t-dot" style="background:#3776AB;"></div> Matplotlib</div>
+      <div class="tech-badge"><div class="t-dot" style="background:#5C4EE5;"></div> Seaborn</div>
+      <div class="tech-badge"><div class="t-dot" style="background:#FF4B4B;"></div> Streamlit</div>
+      <div class="tech-badge"><div class="t-dot" style="background:#F2A200;"></div> Jupyter / Colab</div>
+      <div class="tech-badge"><div class="t-dot" style="background:#F34B7D;"></div> Joblib</div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FOOTER CTA
+       ════════════════════════════════════════ -->
+  <section id="footer-cta">
+    <div class="section-tag">Get Started</div>
+    <h2>Ready to Predict?</h2>
+    <p>
+      Run the Colab notebook to train your models, then launch the Streamlit app —<br />
+      or deploy directly to Streamlit Cloud for free.
+    </p>
+    <div class="hero-buttons">
+      <a href="https://colab.research.google.com" target="_blank" class="btn-primary">
+        📓 Open in Colab
+      </a>
+      <a href="https://share.streamlit.io" target="_blank" class="btn-secondary">
+        🌐 Deploy to Cloud
+      </a>
+    </div>
+
+    <div style="margin-top: 3rem; padding: 1.5rem 2rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); max-width: 600px; margin-left: auto; margin-right: auto; text-align:left;">
+      <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">📦 Quick Start — Run Locally</div>
+      <code style="display:block; font-size: 0.85rem; color: #78DEC7; line-height:2;">
+        pip install streamlit scikit-learn xgboost lightgbm<br />
+        streamlit run capstonepr.py
+      </code>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-icon">🩺</div>
+      DiagnosAI — Early Disease Prediction System
+    </div>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#pipeline">Pipeline</a>
+      <a href="#models">Models</a>
+      <a href="#demo">App</a>
+    </div>
+    <div class="footer-copy">ML Capstone Project &nbsp;·&nbsp; ⚠️ Educational use only — not medical advice</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
